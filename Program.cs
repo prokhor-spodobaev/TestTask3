@@ -49,6 +49,10 @@ namespace TestTask3
     interface IMenuItem
     {
         string Title { get; }
+
+        /// <summary>
+        /// Запустить цикл меню
+        /// </summary>
         void Execute();
     }
 
@@ -137,6 +141,9 @@ namespace TestTask3
             excelDocument = excelDoc;
         }
 
+        /// <summary>
+        /// Инициализация меню
+        /// </summary>
         private void InitializeMenu()
         {
             items.Add(new MenuItem("Информация о клиентах заказавших товар", GetClientsInfoByProductName));
@@ -277,7 +284,11 @@ namespace TestTask3
             dataSet = ConvertExcelToDataSet();
             AddRelationsToDataSet();
         }
-
+        
+        /// <summary>
+        /// Выгрузка и преобразование таблицы в DataSet
+        /// </summary>
+        /// <returns>DataSet</returns>
         public DataSet? ConvertExcelToDataSet()
         {
             DataSet dataSet = new DataSet();
@@ -324,6 +335,9 @@ namespace TestTask3
             return null;
         }
 
+        /// <summary>
+        /// Добавление связей между колонками
+        /// </summary>
         private void AddRelationsToDataSet()
         {
             if (dataSet == null)
@@ -337,6 +351,11 @@ namespace TestTask3
             dataSet.Relations.Add(clientToRequest);
         }
 
+        /// <summary>
+        /// Получить информацию о заказе
+        /// </summary>
+        /// <param name="productName">Наименование товара</param>
+        /// <returns>List объектов ProductRequestInfo с информацией о заказе</returns>
         public List<ProductRequestInfo>? GetClientsInfoByProductName(string productName)
         {
             List<ProductRequestInfo> requestInfos = new List<ProductRequestInfo>();
@@ -377,6 +396,12 @@ namespace TestTask3
             return requestInfos;
         }
 
+        /// <summary>
+        /// Изменить контактное лицо
+        /// </summary>
+        /// <param name="orgName">Название организации</param>
+        /// <param name="newContactName">Новое контактное лицо</param>
+        /// <returns>Result с сообщением о результате операции</returns>
         public Result ChangeClientsContactInfo(string orgName, string newContactName)
         {
             Result result = new Result(false, "Непредвиденная ошибка");
@@ -395,6 +420,10 @@ namespace TestTask3
             return result;
         }
 
+        /// <summary>
+        /// Сохранить данные из DataSet в файл
+        /// </summary>
+        /// <returns> с сообщением о результате операции</returns>
         public Result SaveClientInfoFromDataSetToDocument()
         {
             Result result = new Result(false, null);
