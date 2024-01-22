@@ -11,11 +11,10 @@ namespace TestTask3
     {
         static void Main(string[] args)
         {
-            string filePath = "C:\\тз акелон\\Практическое задание для кандидата.xlsx";
+            string filePath = GetFilePath(); //"C:\\тз акелон\\Практическое задание для кандидата.xlsx";
             ExcelDocument excelDocument = new ExcelDocument(filePath);
             MainMenu mainMenu = new MainMenu(excelDocument);
             mainMenu.Execute();
-            //  = GetFilePath();
 
             Console.ReadKey();
         }
@@ -35,8 +34,8 @@ namespace TestTask3
                     Console.WriteLine("Такого файла не существует");
                     continue;
                 }
-                if (!Path.GetExtension(filePath).Equals("xls", StringComparison.CurrentCultureIgnoreCase) ||
-                    !Path.GetExtension(filePath).Equals("xlsx", StringComparison.CurrentCultureIgnoreCase))
+                if (!Path.GetExtension(filePath).Equals(".xls", StringComparison.CurrentCultureIgnoreCase) &&
+                    !Path.GetExtension(filePath).Equals(".xlsx", StringComparison.CurrentCultureIgnoreCase))
                 {
                     Console.WriteLine("Файл имеет неверный формат");
                     continue;
